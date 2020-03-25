@@ -5,14 +5,12 @@ import java.awt.event.*;
 public class DrawPanel extends JPanel implements Runnable{
 
     private Rect rect;
-    private Rect rectBarier;
-    private boolean Left = false;
-    private boolean Right = false;
+    private Rect rectBarrier;
 
     public DrawPanel() {
 
-        rectBarier = new Rect();
-        rectBarier.setRect(275, 100, 100, 50);
+        rectBarrier = new Rect();
+        rectBarrier.setRect(275, 100, 100, 50);
         rect = new Rect();
         rect.setRect(275, 700, 50, 50);
         setFocusable(true);
@@ -22,23 +20,29 @@ public class DrawPanel extends JPanel implements Runnable{
         this.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
+
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
 
-                if(rect.getX() < 25) Left = false;
-                if(rect.getX() > 500) Right = false;
-                if(e.getKeyCode() == KeyEvent.VK_LEFT && rect.getX() >= 25) Left = true;
-                if(e.getKeyCode() == KeyEvent.VK_RIGHT && rect.getX() <= 500) Right = true;
+                if(e.getKeyCode() == KeyEvent.VK_LEFT && rect.getX() >= 10) {
+                    rect.moveLeft();
+                }
+
+
+                if(e.getKeyCode() == KeyEvent.VK_RIGHT && rect.getX() <= 520) {
+                    rect.moveRight();
+                }
+
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_LEFT) Left = false;
-                if(e.getKeyCode() == KeyEvent.VK_RIGHT) Right = false;
+
             }
         });
+
     }
 
     @Override
@@ -46,22 +50,16 @@ public class DrawPanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.draw(rect);
-        g2.draw(rectBarier);
+        //System.out.println(rect.getX());
+       // g2.draw(rectBarrier);
 
     }
 
-    public void animation(){
-        if(Left) rect.moveLeft();
-        if(Right) rect.moveRight();
-       // rectBarier.moveDown();
-        super.repaint();
-    }
 
-
-    @Override
+  @Override
     public void run() {
         while(true){
-            animation();
+            super.repaint();
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

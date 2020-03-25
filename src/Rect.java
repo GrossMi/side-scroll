@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 public class Rect extends Rectangle2D {
@@ -43,12 +42,12 @@ public class Rect extends Rectangle2D {
 
     @Override
     public double getX() {
-        return point.getX();
+        return x0;
     }
 
     @Override
     public double getY() {
-        return point.getY();
+        return y0;
     }
 
     @Override
@@ -68,17 +67,17 @@ public class Rect extends Rectangle2D {
     }
 
     public void moveLeft(){
-        x0 -= 1;
+        x0 -= 5;
         this.setRect(x0, y0, getWidth(), getHeight());
     }
 
     public void moveRight(){
-        x0 += 1;
+        x0 += 5;
         this.setRect(x0, y0, getWidth(), getHeight());
     }
 
     public void moveDown() {
-        y0++;
+        y0+= 1;
         this.setRect(x0, y0, getWidth(), getHeight());
     }
 }
