@@ -80,4 +80,9 @@ public class Rect extends Rectangle2D {
         y0+= 1;
         this.setRect(x0, y0, getWidth(), getHeight());
     }
+
+    public void changePlace(double rateX, double rateY){
+        this.setRect(x0*rateX, y0*rateY, getWidth(), getHeight());
+
+    }
 }
